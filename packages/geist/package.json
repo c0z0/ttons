@@ -1,5 +1,5 @@
 {
-  "name": "geist",
+  "name": "@cserdean/geist",
   "version": "0.0.1",
   "description": "A small design library.",
   "main": "dist/index.js",
@@ -15,7 +15,6 @@
     "docz:serve": "docz build && docz serve"
   },
   "devDependencies": {
-    "docz": "^2.2.0",
     "microbundle": "^0.11.0"
   },
   "dependencies": {

@@ -1,0 +1,4 @@
+{
+  "private": true,
+  "workspaces": ["packages/geist", "packages/docs", "packages/gallery"]
+}
