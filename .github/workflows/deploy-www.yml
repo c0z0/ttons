@@ -25,7 +25,7 @@ jobs:
       - name: 'Yarn install'
         run: yarn install
       - name: 'Build packages'
-        run: yarn workspaces run build
+        run: yarn --cwd packages/icons build && yarn --cwd packages/ttons build && yarn --cwd packages/www build
       - name: 'Export next'
         run: yarn --cwd packages/www export
       - name: 'Copy now.json'
