@@ -2,7 +2,7 @@ import React from 'react';
 
 import Container, { ContentContainer } from './index';
 import Text from '../text';
-import { Main as TextExample } from '../text/Text.stories';
+import { Primary as TextExample } from '../text/Text.stories';
 
 export default {
   title: 'Container',

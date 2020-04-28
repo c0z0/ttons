@@ -17,7 +17,7 @@ export default {
   ],
 };
 
-export const Main = () => (
+export const Primary = () => (
   <>
     <Text h1>Mercenary War</Text>
     <Text>

@@ -2,7 +2,7 @@ import React from 'react';
 import { Global, css } from '@emotion/core';
 
 const global = css`
-  * {
+  *:not(svg) {
     font-family: var(--ttons-font);
     font-size: 16px;
     color: var(--ttons-foreground);
