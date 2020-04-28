@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, HtmlHTMLAttributes } from 'react';
+import React, { PropsWithChildren } from 'react';
 import styled, { StyledComponent } from '@emotion/styled';
 
 export const H1 = styled.h1`
@@ -60,7 +60,7 @@ export const CodeBlock: React.FC = ({ children }) => (
   </CodePre>
 );
 
-type TextProps = {
+export interface TextProps extends React.HTMLAttributes<HTMLElement> {
   bold?: boolean;
   small?: boolean;
   b?: boolean;
@@ -70,7 +70,7 @@ type TextProps = {
   h3?: boolean;
   p?: boolean;
   as?: string;
-};
+}
 
 /**
  * Typography comp
@@ -84,7 +84,9 @@ export const Text = ({
   h2,
   h3,
   as,
+  p,
   children,
+  ...passedProps
 }: PropsWithChildren<TextProps>) => {
   let Component: StyledComponent<any, any, any>;
 
@@ -97,7 +99,7 @@ export const Text = ({
   if (small || s) child = <small>{child}</small>;
   if (bold || b) child = <b>{child}</b>;
 
-  return <Component as={as}>{child}</Component>;
+  return <Component {...passedProps}>{child}</Component>;
 };
 
 Text.defaultProps = {

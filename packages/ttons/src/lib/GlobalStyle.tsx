@@ -61,6 +61,8 @@ const lightTheme = css`
     --ttons-border: 1px solid #dddddd;
     --ttons-border-radius: 0.25rem;
     --ttons-transition: 0.2s;
+    --ttons-gap: 16pt;
+    --ttons-half-gap: calc(var(--ttons-gap) / 2);
   }
   ${global};
 `;
@@ -71,6 +73,7 @@ const darkTheme = css`
     --ttons-background: #202020;
     --ttons-foreground: #ffffff;
     --ttons-code-color: var(--ttons-cyan);
+    --ttons-gray-bg: #333333;
 
     --ttons-border: 1px solid #484848;
   }

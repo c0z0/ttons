@@ -1,12 +1,17 @@
+import React, { PropsWithChildren } from 'react';
 import styled from '@emotion/styled';
 
-type DefaultButtonProps = {
+export type DefaultButtonProps = {
   small?: boolean;
+  color?: string;
 };
 
 export const DefaultButton = styled.button<DefaultButtonProps>`
-  background: var(--ttons-foreground);
-  color: var(--ttons-background);
+  background: ${p => p.color};
+  color: ${p =>
+    p.color !== 'var(--ttons-foreground)'
+      ? '#ffffff'
+      : 'var(--ttons-background)'};
   outline: none;
   border: none;
   padding: 0.5rem;
@@ -14,7 +19,7 @@ export const DefaultButton = styled.button<DefaultButtonProps>`
   max-width: 100%;
   cursor: pointer;
   border-radius: var(--ttons-border-radius);
-  border: solid 1px var(--ttons-foreground);
+  border: solid 1px ${p => p.color};
   transition: all var(--ttons-transition);
 
   &:hover {
@@ -28,6 +33,10 @@ export const DefaultButton = styled.button<DefaultButtonProps>`
       padding: 0.25rem;
    `};
 `;
+
+DefaultButton.defaultProps = {
+  color: 'var(--ttons-foreground)',
+};
 
 export const SecondaryButton = styled(DefaultButton)`
   border: var(--ttons-border);
@@ -49,3 +58,36 @@ export const DisabledButton = styled(DefaultButton)`
 `;
 
 DisabledButton.defaultProps = { disabled: true };
+
+export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
+  small?: boolean;
+  secondary?: boolean;
+  disabled?: boolean;
+  accented?: boolean;
+  error?: boolean;
+  color?: string;
+  as?: string;
+}
+
+export const Button = ({
+  disabled = false,
+  accented = false,
+  error = false,
+  color,
+  secondary = false,
+  small = false,
+  ...passedProps
+}: PropsWithChildren<ButtonProps>) => {
+  let Component: any = DefaultButton;
+  let buttonColor = color;
+
+  if (disabled) Component = DisabledButton;
+  if (secondary) Component = SecondaryButton;
+
+  if (accented) buttonColor = 'var(--ttons-accent)';
+  else if (error) buttonColor = 'var(--ttons-error)';
+
+  return <Component color={buttonColor} {...passedProps} small={small} />;
+};
+
+export default Button;

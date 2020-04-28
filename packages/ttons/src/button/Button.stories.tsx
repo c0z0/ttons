@@ -1,23 +1,61 @@
-import React from 'react';
+import * as React from 'react';
 
-import { DefaultButton, DisabledButton, SecondaryButton } from './index';
+import Container from '../container';
+import Button from './index';
 
 export default {
   title: 'Button',
+  component: Button,
+  parameters: {
+    componentSubtitle: 'Used to trigger an operation.',
+  },
 };
 
-export const Primary = () => <DefaultButton>Action</DefaultButton>;
-
-export const Default = () => <DefaultButton>Action</DefaultButton>;
-
-export const Small = () => <DefaultButton small>Action</DefaultButton>;
-
-export const Secondary = () => <SecondaryButton>Action</SecondaryButton>;
-export const SecondarySmall = () => (
-  <SecondaryButton small>Action</SecondaryButton>
+export const Primary = () => (
+  <Container alignItems="flex-start">
+    <Button>Action</Button>
+    <Button disabled>Action</Button>
+    <Button small>Action</Button>
+  </Container>
 );
 
-export const Disabled = () => <DisabledButton>Action</DisabledButton>;
+export const Default = () => <Button>Action</Button>;
+
+export const Small = () => <Button small>Action</Button>;
+
+export const Secondary = () => <Button secondary>Action</Button>;
+export const SecondarySmall = () => (
+  <Button secondary small>
+    Action
+  </Button>
+);
+
+export const Disabled = () => <Button disabled>Action</Button>;
 export const DisabledSmall = () => (
-  <DisabledButton small>Action</DisabledButton>
+  <Button disabled small>
+    Action
+  </Button>
+);
+
+export const Accented = () => <Button accented>Action</Button>;
+export const AccentedSmall = () => (
+  <Button accented small>
+    Action
+  </Button>
+);
+
+export const Error = () => <Button error>Action</Button>;
+export const ErrorSmall = () => (
+  <Button error small>
+    Action
+  </Button>
+);
+
+export const CustomColor = () => (
+  <Button color="var(--ttons-violet)">Action</Button>
+);
+export const CustomColorSmall = () => (
+  <Button color="var(--ttons-violet)" small>
+    Action
+  </Button>
 );
