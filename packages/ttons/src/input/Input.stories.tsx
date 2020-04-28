@@ -2,7 +2,7 @@ import React from 'react';
 
 import Input from './index';
 import Container from '../container';
-import MailIcon from '../icons/Mail';
+import { Mail as MailIcon } from '@cserdean/icons';
 
 export default {
   title: 'Input',

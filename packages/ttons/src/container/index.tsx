@@ -28,7 +28,7 @@ const StyledContainer = styled.div<StyledContainerProps>`
   justify-content: ${p => p.justifyContent};
   align-items: ${p => p.alignItems};
 
-  & > :not(:first-of-type) {
+  & > :not(:first-child) {
     margin: ${p =>
       getMarginDirection(
         p.direction || '',
@@ -39,7 +39,7 @@ const StyledContainer = styled.div<StyledContainerProps>`
   ${phoneOnly} {
     flex-direction: ${p => p.directionMobile};
 
-    & > :not(:first-of-type) {
+    & > :not(:first-child) {
       margin: ${p =>
         getMarginDirection(
           p.directionMobile || '',

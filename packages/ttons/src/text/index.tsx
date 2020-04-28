@@ -48,6 +48,7 @@ const CodePre = styled.pre`
   border: var(--ttons-border);
   padding: 1.5rem;
   border-radius: var(--ttons-border-radius);
+  overflow-x: scroll;
 `;
 
 const CodeBlockElement = styled.code`

@@ -1,7 +1,9 @@
-name: Deploy www
+name: Deploy docs
 on:
   push:
     branches: [master]
+    paths-ignore:
+      - 'packages/www'
 
 jobs:
   deploy:
@@ -14,7 +16,6 @@ jobs:
       - name: Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
-
       - uses: actions/cache@v1
         id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
         with:
@@ -24,16 +25,14 @@ jobs:
             ${{ runner.os }}-yarn-
       - name: 'Yarn install'
         run: yarn install
-      - name: 'Build packages'
-        run: yarn workspaces foreach run build
-      - name: 'Export next'
-        run: yarn --cwd packages/www export
-      - name: 'Copy now.json'
-        run: cp packages/www/now.json packages/www/out/now.json
+      - name: 'Build icon package'
+        run: yarn --cwd packages/icons build
+      - name: 'Export storybook'
+        run: yarn --cwd packages/ttons build-storybook
       - uses: amondnet/now-deployment@v2
         with:
           zeit-token: ${{ secrets.ZEIT_TOKEN }}
-          working-directory: 'packages/www/out'
+          working-directory: 'packages/ttons/storybook-static'
           now-args: '--prod'
           now-org-id: ${{ secrets.ORG_ID}}
-          now-project-id: ${{ secrets.PROJECT_ID}}
+          now-project-id: ${{ secrets.PROJECT_ID_DOCS}}

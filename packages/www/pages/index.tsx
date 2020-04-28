@@ -25,13 +25,11 @@ export default () => (
       </Container>
     </Container>
     <Container>
-      <Container>
-        <Text h3>Getting started:</Text>
-        <CodeBlock>{`$ yarn install @cserdean/ttons`}</CodeBlock>
-        <Text>Then in your React app:</Text>
-        <CodeBlock>{`import React from 'react'\nimport { Button, GlobalStyle } from '@cserdean/ttons\n\nexport default function Component() {\n  return (\n    </>\n      <Globalstyle /> {/* Place once anywhere in the app */}\n      <Button>Press me!</Button>\n    </>\n  )\n}`}</CodeBlock>
-      </Container>
-      <Container>
+      <Text h3>Getting started:</Text>
+      <CodeBlock>{`$ yarn install @cserdean/ttons`}</CodeBlock>
+      <Text>Then in your React app:</Text>
+      <CodeBlock>{`import React from 'react'\nimport { Button, GlobalStyle } from '@cserdean/ttons\n\nexport default function Component() {\n  return (\n    </>\n      <Globalstyle /> {/* Place once anywhere in the app */}\n      <Button>Press me!</Button>\n    </>\n  )\n}`}</CodeBlock>
+      <div>
         <Text>Result: </Text>
         <Container
           alignItems="flex-start"
@@ -42,13 +40,11 @@ export default () => (
         >
           <Button>Press me!</Button>
         </Container>
-      </Container>
-      <Container>
-        <Text>
-          And tadaaaaa!! 🎉 You have access to all the components and{' '}
-          <b>server side rendering works out of the box.</b>
-        </Text>
-      </Container>
+      </div>
+      <Text>
+        And tadaaaaa!! 🎉 You have access to all the components and{' '}
+        <b>server side rendering works out of the box.</b>
+      </Text>
     </Container>
   </ContentContainer>
 );

@@ -59,6 +59,7 @@
     "typescript": "^3.8.3"
   },
   "dependencies": {
+    "@cserdean/icons": "*",
     "@emotion/core": "^10.0.28",
     "@emotion/styled": "^10.0.27"
   }

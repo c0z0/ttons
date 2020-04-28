@@ -1,4 +1,4 @@
-import * as Icons from './icons';
+import * as Icons from '@cserdean/icons';
 import * as breakPoints from './lib/breakPoints';
 
 export { Button } from './button';
