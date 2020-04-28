@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Text, { InlineCode, CodeBlock } from './index';
+import { ContentContainer } from '../container';
 
 export default {
   title: 'Text',
@@ -9,6 +10,11 @@ export default {
   parameters: {
     componentSubtitle: 'Display text using well-defined typographic styles.',
   },
+  decorators: [
+    (render: any) => (
+      <ContentContainer marginTop={false}>{render()}</ContentContainer>
+    ),
+  ],
 };
 
 export const Main = () => (

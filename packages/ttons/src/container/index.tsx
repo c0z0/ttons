@@ -28,7 +28,7 @@ const StyledContainer = styled.div<StyledContainerProps>`
   justify-content: ${p => p.justifyContent};
   align-items: ${p => p.alignItems};
 
-  & :not(:first-of-type) {
+  & > :not(:first-of-type) {
     margin: ${p =>
       getMarginDirection(
         p.direction || '',
@@ -39,7 +39,7 @@ const StyledContainer = styled.div<StyledContainerProps>`
   ${phoneOnly} {
     flex-direction: ${p => p.directionMobile};
 
-    & :not(:first-of-type) {
+    & > :not(:first-of-type) {
       margin: ${p =>
         getMarginDirection(
           p.directionMobile || '',
@@ -106,3 +106,20 @@ Container.defaultProps = {
 };
 
 export default Container;
+
+type ContentContainerProps = {
+  marginTop?: boolean;
+};
+export const ContentContainer = styled.div<ContentContainerProps>`
+  max-width: 900px;
+  margin: ${p => (p.marginTop ? '80px' : '0')} auto 0 auto;
+
+  ${phoneOnly} {
+    margin: ${p => (p.marginTop ? '40px' : '0')} auto 0 auto;
+    padding: 0 20px;
+  }
+`;
+
+ContentContainer.defaultProps = {
+  marginTop: true,
+};

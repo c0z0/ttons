@@ -1,7 +1,8 @@
 import React from 'react';
 
-import Container from './index';
+import Container, { ContentContainer } from './index';
 import Text from '../text';
+import { Main as TextExample } from '../text/Text.stories';
 
 export default {
   title: 'Container',
@@ -104,4 +105,16 @@ export const Responsive = () => (
       <Text style={{ color: 'white' }}>Cont 2</Text>
     </Container>
   </Container>
+);
+
+export const Content = () => (
+  <ContentContainer>
+    <TextExample />
+  </ContentContainer>
+);
+
+export const ContentNoMarginTop = () => (
+  <ContentContainer marginTop={false}>
+    <TextExample />
+  </ContentContainer>
 );

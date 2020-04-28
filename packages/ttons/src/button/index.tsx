@@ -22,8 +22,14 @@ export const DefaultButton = styled.button<DefaultButtonProps>`
   border: solid 1px ${p => p.color};
   transition: all var(--ttons-transition);
 
-  &:hover {
-    opacity: 0.66;
+  &:not(:disabled) {
+    &:hover {
+      opacity: 0.66;
+    }
+
+    &:active {
+      scale: 0.95;
+    }
   }
 
   ${p =>
@@ -45,7 +51,29 @@ export const SecondaryButton = styled(DefaultButton)`
 
   &:hover {
     border: solid 1px var(--ttons-foreground);
-    opacity: 1;
+    opacity: 1 !important;
+  }
+`;
+
+type ButtonGroupProps = {
+  flex?: boolean;
+};
+
+export const ButtonGroup = styled.div<ButtonGroupProps>`
+  display: ${p => (p.flex ? 'flex' : 'block')};
+  & > button {
+    flex: ${p => (p.flex ? '1' : 'unset')};
+    border-radius: 0;
+  }
+
+  & > button:first-of-type {
+    border-top-left-radius: var(--ttons-border-radius);
+    border-bottom-left-radius: var(--ttons-border-radius);
+  }
+
+  & > button:last-of-type {
+    border-top-right-radius: var(--ttons-border-radius);
+    border-bottom-right-radius: var(--ttons-border-radius);
   }
 `;
 
@@ -53,7 +81,6 @@ export const DisabledButton = styled(DefaultButton)`
   border: var(--ttons-border);
   background: var(--ttons-gray-bg) !important;
   color: var(--ttons-gray-fg) !important;
-  opacity: 1 !important;
   cursor: not-allowed;
 `;
 

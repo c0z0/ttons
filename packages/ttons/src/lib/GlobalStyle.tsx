@@ -70,7 +70,7 @@ const lightTheme = css`
 const darkTheme = css`
   ${lightTheme};
   :root {
-    --ttons-background: #202020;
+    --ttons-background: #000000;
     --ttons-foreground: #ffffff;
     --ttons-code-color: var(--ttons-cyan);
     --ttons-gray-bg: #333333;

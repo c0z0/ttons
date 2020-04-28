@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import Container from '../container';
-import Button from './index';
+import Button, { ButtonGroup } from './index';
 
 export default {
   title: 'Button',
@@ -58,4 +58,23 @@ export const CustomColorSmall = () => (
   <Button color="var(--ttons-violet)" small>
     Action
   </Button>
+);
+
+export const Group = () => (
+  <>
+    <Container>
+      <ButtonGroup>
+        <Button>Action 1</Button>
+        <Button accented>Action 2</Button>
+        <Button error>Action 3</Button>
+      </ButtonGroup>
+    </Container>
+    <Container>
+      <ButtonGroup flex>
+        <Button>Action 1</Button>
+        <Button accented>Action 2</Button>
+        <Button error>Action 3</Button>
+      </ButtonGroup>
+    </Container>
+  </>
 );
