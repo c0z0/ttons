@@ -1,9 +1,8 @@
 {
   "private": true,
   "workspaces": [
-    "packages/geist",
-    "packages/gallery",
-    "packages/ttons"
+    "packages/ttons",
+    "packages/www"
   ],
   "resolutions": {
     "**/react": "16.13.0",

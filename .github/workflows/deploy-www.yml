@@ -1,0 +1,26 @@
+name: Deploy www
+on:
+  push:
+    branches: [master]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '13.x'
+      - name: 'Yarn install'
+        run: yarn install
+      - name: 'Build ttons library'
+        run: yarn --cwd packages/ttons build
+      - name: 'Build next'
+        run: yarn --cwd packages/www build && yarn --cwd packages/www export
+      - uses: amondnet/now-deployment@v2
+        with:
+          zeit-token: ${{ secrets.ZEIT_TOKEN }}
+          working-directory: 'packages/www/out'
+          now-args: '--prod'
+          now-org-id: ${{ secrets.ORG_ID}}
+          now-project-id: ${{ secrets.PROJECT_ID}}

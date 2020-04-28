@@ -51,9 +51,12 @@ const lightTheme = css`
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;1,200;1,300;1,400;1,600;1,700;1,800&display=swap');
 
     /* --ttons-font: 'Noto Sans', sans-serif; */
-    --ttons-font: 'Nunito Sans', -apple-system, '.SFNSText-Regular',
+    /* --ttons-font: 'Nunito Sans', -apple-system, '.SFNSText-Regular',
       'San Francisco', BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue',
-      Helvetica, Arial, sans-serif;
+      Helvetica, Arial, sans-serif; */
+    --ttons-font: 'SF Pro Text', -apple-system, BlinkMacSystemFont, 'Segoe UI',
+      Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji',
+      'Segoe UI Emoji', 'Segoe UI Symbol';
     --ttons-font-mono: Menlo, Monaco, Lucida Console, Liberation Mono,
       DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
 
@@ -80,7 +83,7 @@ const darkTheme = css`
 `;
 
 type GlobalStyleProps = {
-  theme?: string;
+  theme?: 'light' | 'dark';
 };
 
 const GlobalStyle = ({ theme = 'light' }: GlobalStyleProps) => (
