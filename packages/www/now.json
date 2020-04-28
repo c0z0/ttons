@@ -1,6 +1,6 @@
 {
   "routes": [
-    { "src": "/docs/?(.*)", "dest": "https://ttons-docs.now.sh/$1" },
+    { "src": "/docs/?(.*)", "dest": "https://ttons-docs.now.sh/docs/$1" },
     {
       "src": "/(.*)",
       "dest": "/$1"
