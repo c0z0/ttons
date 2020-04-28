@@ -9,7 +9,7 @@ const StyledInput = styled.input<StyledInputProps>`
   border: none;
   outline: none;
   flex: 1;
-  padding: 0.5rem 0;
+  padding: 0.5rem;
   background: none;
 
   ${p => p.error && 'color: var(--ttons-error);'}
