@@ -1,5 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 import styled from '@emotion/styled';
+import { keyframes } from '@emotion/core';
 
 export type DefaultButtonProps = {
   small?: boolean;
@@ -21,6 +22,10 @@ export const DefaultButton = styled.button<DefaultButtonProps>`
   border-radius: var(--ttons-border-radius);
   border: solid 1px ${p => p.color};
   transition: all var(--ttons-transition);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 
   &:not(:disabled) {
     &:hover {
@@ -60,7 +65,7 @@ type ButtonGroupProps = {
 };
 
 export const ButtonGroup = styled.div<ButtonGroupProps>`
-  display: ${p => (p.flex ? 'flex' : 'block')};
+  display: flex;
   & > button {
     flex: ${p => (p.flex ? '1' : 'unset')};
     border-radius: 0;
@@ -86,6 +91,57 @@ export const DisabledButton = styled(DefaultButton)`
 
 DisabledButton.defaultProps = { disabled: true };
 
+const loadingKeyframes = keyframes`
+  from {
+    background: #ddd;
+  }
+  40% {
+    background: #484848;
+  }
+
+  to {
+    background: #ddd;
+  }
+`;
+
+export const LoadingIndicator = styled.span`
+  display: inline-block;
+  position: relative;
+  height: 0.25rem;
+  width: 0.25rem;
+  align-self: center;
+
+  border-radius: 100%;
+  background: #ddd;
+
+  margin: calc((22.5px - 0.25rem) / 2) 0;
+
+  animation: ${loadingKeyframes} 1.75s infinite;
+
+  &::before,
+  &::after {
+    animation: ${loadingKeyframes} 1.75s infinite;
+    position: absolute;
+    display: inline-block;
+    content: '';
+    height: 0.25rem;
+    width: 0.25rem;
+    top: 50%;
+    left: 50%;
+    border-radius: 100%;
+    background: #ddd;
+  }
+
+  &::before {
+    transform: translate(-250%, -50%);
+    animation-delay: -0.25s;
+  }
+  &::after {
+    transform: translate(150%, -50%);
+    animation-delay: 0.25s;
+  }
+`;
+
 export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   small?: boolean;
   secondary?: boolean;
@@ -94,6 +150,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   error?: boolean;
   color?: string;
   as?: string;
+  loading?: boolean;
 }
 
 export const Button = ({
@@ -103,10 +160,19 @@ export const Button = ({
   color,
   secondary = false,
   small = false,
+  loading = false,
+  children,
   ...passedProps
 }: PropsWithChildren<ButtonProps>) => {
   let Component: any = DefaultButton;
   let buttonColor = color;
+
+  if (loading)
+    return (
+      <DisabledButton {...passedProps} small={small}>
+        <LoadingIndicator />
+      </DisabledButton>
+    );
 
   if (disabled) Component = DisabledButton;
   if (secondary) Component = SecondaryButton;
@@ -114,7 +180,11 @@ export const Button = ({
   if (accented) buttonColor = 'var(--ttons-accent)';
   else if (error) buttonColor = 'var(--ttons-error)';
 
-  return <Component color={buttonColor} {...passedProps} small={small} />;
+  return (
+    <Component color={buttonColor} {...passedProps} small={small}>
+      {children}
+    </Component>
+  );
 };
 
 export default Button;

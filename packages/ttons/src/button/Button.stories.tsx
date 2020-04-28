@@ -37,6 +37,13 @@ export const DisabledSmall = () => (
   </Button>
 );
 
+export const Loading = () => <Button loading>Action</Button>;
+export const LoadingSmall = () => (
+  <Button loading small>
+    Action
+  </Button>
+);
+
 export const Accented = () => <Button accented>Action</Button>;
 export const AccentedSmall = () => (
   <Button accented small>
@@ -68,8 +75,6 @@ export const Group = () => (
         <Button accented>Action 2</Button>
         <Button error>Action 3</Button>
       </ButtonGroup>
-    </Container>
-    <Container>
       <ButtonGroup flex>
         <Button>Action 1</Button>
         <Button accented>Action 2</Button>
