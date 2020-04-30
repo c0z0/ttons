@@ -14,6 +14,10 @@ const global = css`
     padding: 0;
   }
 
+  *::selection {
+    background-color: var(--ttons-magenta);
+  }
+
   a {
     color: var(--ttons-accent);
     text-decoration: none;
@@ -29,7 +33,8 @@ const lightTheme = css`
     --ttons-foreground: #000000;
     --ttons-accent: var(--ttons-success);
     --ttons-background: #ffffff;
-    --ttons-gray-bg: #fafafa;
+    --ttons-gray-bg: #f0f0f0;
+    --ttons-gray-bg-inverse: #333333;
     --ttons-gray-fg: #888888;
 
     --ttons-error: #ee0000;
@@ -46,6 +51,7 @@ const lightTheme = css`
     --ttons-cyan: #79ffe1;
 
     --ttons-code-color: var(--ttons-magenta);
+    --tton-highlight: var(--tton-cyan);
 
     /* Fonts */
     @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Nunito+Sans:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;1,200;1,300;1,400;1,600;1,700;1,800&display=swap');
@@ -61,7 +67,8 @@ const lightTheme = css`
       DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
 
     /** Other */
-    --ttons-border: 1px solid #dddddd;
+    --ttons-border-color: #dddddd;
+    --ttons-border: 1px solid var(--ttons-border-color);
     --ttons-border-radius: 0.25rem;
     --ttons-transition: 0.2s;
     --ttons-gap: 16pt;
@@ -77,8 +84,10 @@ const darkTheme = css`
     --ttons-foreground: #ffffff;
     --ttons-code-color: var(--ttons-cyan);
     --ttons-gray-bg: #333333;
+    --ttons-gray-bg-inverse: #eeeeee;
+    --tton-highlight: var(--tton-magenta);
 
-    --ttons-border: 1px solid #484848;
+    --ttons-border-color: #484848;
   }
 `;
 

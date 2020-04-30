@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import Container from '../container';
 import Button, { ButtonGroup } from './index';
+import { Menu as MenuIcon } from '@cserdean/icons';
 
 export default {
   title: 'Button',
@@ -64,6 +65,12 @@ export const CustomColor = () => (
 export const CustomColorSmall = () => (
   <Button color="var(--ttons-violet)" small>
     Action
+  </Button>
+);
+
+export const Icon = () => (
+  <Button icon>
+    <MenuIcon />
   </Button>
 );
 

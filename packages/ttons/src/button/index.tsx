@@ -16,7 +16,7 @@ export const DefaultButton = styled.button<DefaultButtonProps>`
   outline: none;
   border: none;
   padding: 0.5rem;
-  min-width: 200px;
+  min-width: 12rem;
   max-width: 100%;
   cursor: pointer;
   border-radius: var(--ttons-border-radius);
@@ -48,6 +48,29 @@ export const DefaultButton = styled.button<DefaultButtonProps>`
 DefaultButton.defaultProps = {
   color: 'var(--ttons-foreground)',
 };
+
+export const IconButton = styled.button`
+  background: none;
+  outline: none;
+  border: none;
+  height: 2.5rem;
+  width: 2.5rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  border-radius: var(--ttons-border-radius);
+  transition: all var(--ttons-transition);
+  font-size: 1.5rem;
+
+  &:not(:disabled) {
+    &:hover {
+      background: var(--ttons-gray-bg);
+    }
+
+    &:active {
+      scale: 0.95;
+    }
+  }
+`;
 
 export const SecondaryButton = styled(DefaultButton)`
   border: var(--ttons-border);
@@ -151,6 +174,7 @@ export interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   color?: string;
   as?: string;
   loading?: boolean;
+  icon?: boolean;
 }
 
 export const Button = ({
@@ -161,11 +185,14 @@ export const Button = ({
   secondary = false,
   small = false,
   loading = false,
+  icon = false,
   children,
   ...passedProps
 }: PropsWithChildren<ButtonProps>) => {
   let Component: any = DefaultButton;
   let buttonColor = color;
+
+  if (icon) return <IconButton {...passedProps}>{children}</IconButton>;
 
   if (loading)
     return (

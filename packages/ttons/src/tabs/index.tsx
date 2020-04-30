@@ -1,11 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled';
 
-const TabsContainer = styled.div`
+const TabsContainer = styled.div<{ right?: boolean }>`
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: ${p => (p.right ? 'flex-end' : 'flex-start')};
   border-bottom: var(--ttons-border);
 `;
 
@@ -18,6 +18,7 @@ const TabItem = styled.div<{ active?: boolean; disabled?: boolean }>`
   padding: 0.5rem 0;
   margin-right: 2rem;
   margin-bottom: -2px;
+  transition: all var(--ttons-transition);
 
   color: ${p => `var(--ttons-${p.active ? 'foreground' : 'gray-fg'})`};
 
@@ -33,10 +34,17 @@ interface TabsProps {
   }[];
   onSelect?: (value: string) => void;
   disabled?: boolean;
+  right?: boolean;
 }
 
-export const Tabs = ({ selected, tabs, onSelect, disabled }: TabsProps) => (
-  <TabsContainer>
+export const Tabs = ({
+  right,
+  selected,
+  tabs,
+  onSelect,
+  disabled,
+}: TabsProps) => (
+  <TabsContainer right={right}>
     {tabs.map(({ content, value }) => (
       <TabItem
         active={value === selected}
