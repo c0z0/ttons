@@ -12,12 +12,14 @@ const StyledInput = styled.input<StyledInputProps>`
   padding: 0.5rem;
   background: none;
 
-  ${p => p.error && 'color: var(--ttons-error);'}
+  ${(p) => p.error && 'color: var(--ttons-error);'}
 `;
 
-const InputWrapper = styled.div`
-  min-width: 250px;
+const InputWrapper = styled.div<{ flex?: number }>`
   display: inline-flex;
+  min-width: 250px;
+  max-width: 100%;
+  flex: ${(p) => p.flex || 1};
 `;
 
 type InputContainerProps = {
@@ -36,9 +38,9 @@ const InputContainer = styled.div<InputContainerProps>`
   transition: border var(--ttons-transition);
   flex: 1;
 
-  ${p => p.error && 'border-color: var(--ttons-error) !important;'}
+  ${(p) => p.error && 'border-color: var(--ttons-error) !important;'}
 
-  ${p =>
+  ${(p) =>
     p.hasLabel &&
     p.labelPosition === 'left' &&
     `
@@ -46,7 +48,7 @@ const InputContainer = styled.div<InputContainerProps>`
     border-top-left-radius: 0; 
   `}
 
-  ${p =>
+  ${(p) =>
     p.hasLabel &&
     p.labelPosition === 'right' &&
     `
@@ -58,7 +60,7 @@ const InputContainer = styled.div<InputContainerProps>`
     border: 1px solid var(--ttons-foreground);
   }
 
-  ${p =>
+  ${(p) =>
     p.disabled &&
     `
     background: var(--ttons-gray-bg);
@@ -80,7 +82,7 @@ const InlineLabel = styled.label<InlineLabelProps>`
   border: var(--ttons-border);
   border-radius: var(--ttons-border-radius);
 
-  ${p =>
+  ${(p) =>
     !p.reverse &&
     `
     border-right: none;
@@ -88,7 +90,7 @@ const InlineLabel = styled.label<InlineLabelProps>`
     border-top-right-radius: 0; 
   `}
 
-  ${p =>
+  ${(p) =>
     p.reverse &&
     `
     border-left: none;
@@ -101,17 +103,20 @@ const InlineLabel = styled.label<InlineLabelProps>`
 
 export const Label = styled.label`
   color: var(--ttons-gray-fg);
-  font-weight: bold;
   display: block;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
 `;
 
-export interface InputProps extends React.HTMLAttributes<HTMLInputElement> {
+export interface InputProps
+  extends React.InputHTMLAttributes<HTMLInputElement> {
   disabled?: boolean;
   label?: string;
   labelPosition?: 'left' | 'right';
   error?: boolean;
   icon?: React.ReactNode;
   iconRight?: React.ReactNode;
+  flex?: number;
 }
 
 export const Input = ({
@@ -121,27 +126,26 @@ export const Input = ({
   error = false,
   icon = null,
   iconRight = null,
+  flex,
   ...passedProps
-}: InputProps) => {
-  return (
-    <InputWrapper>
-      {label && labelPosition === 'left' && <InlineLabel>{label}</InlineLabel>}
-      <InputContainer
-        error={error}
-        disabled={disabled}
-        hasLabel={label !== ''}
-        labelPosition={labelPosition}
-      >
-        {icon}
-        <StyledInput disabled={disabled} {...passedProps} error={error} />
-        {iconRight}
-      </InputContainer>
-      {label && labelPosition === 'right' && (
-        <InlineLabel reverse>{label}</InlineLabel>
-      )}
-    </InputWrapper>
-  );
-};
+}: InputProps) => (
+  <InputWrapper flex={flex}>
+    {label && labelPosition === 'left' && <InlineLabel>{label}</InlineLabel>}
+    <InputContainer
+      error={error}
+      disabled={disabled}
+      hasLabel={label !== ''}
+      labelPosition={labelPosition}
+    >
+      {icon}
+      <StyledInput disabled={disabled} {...passedProps} error={error} />
+      {iconRight}
+    </InputContainer>
+    {label && labelPosition === 'right' && (
+      <InlineLabel reverse>{label}</InlineLabel>
+    )}
+  </InputWrapper>
+);
 
 Input.Label = Label;
 

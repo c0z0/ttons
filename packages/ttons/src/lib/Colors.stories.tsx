@@ -8,14 +8,14 @@ type ColorContainerProps = {
 
 const ColorContainer = styled.div<ColorContainerProps>`
   padding: 2rem;
-  background: var(${p => p.color});
+  background: var(${(p) => p.color});
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 
   color: var(
-    ${p => (p.inverted ? '--ttons-background' : '--ttons-foreground')}
+    ${(p) => (p.inverted ? '--ttons-background' : '--ttons-foreground')}
   );
 `;
 

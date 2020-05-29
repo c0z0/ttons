@@ -1,8 +1,8 @@
 import * as React from 'react';
 
+import { Menu as MenuIcon } from '@cserdean/icons';
 import Container from '../container';
 import Button, { ButtonGroup } from './index';
-import { Menu as MenuIcon } from '@cserdean/icons';
 
 export default {
   title: 'Button',

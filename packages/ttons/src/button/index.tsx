@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import styled from '@emotion/styled';
+import styled, { StyledComponent } from '@emotion/styled';
 import { keyframes } from '@emotion/core';
 
 export type DefaultButtonProps = {
@@ -8,11 +8,14 @@ export type DefaultButtonProps = {
 };
 
 export const DefaultButton = styled.button<DefaultButtonProps>`
-  background: ${p => p.color};
-  color: ${p =>
-    p.color !== 'var(--ttons-foreground)'
-      ? '#ffffff'
-      : 'var(--ttons-background)'};
+  background: ${(p) => p.color};
+  &,
+  & * {
+    color: ${(p) =>
+      p.color !== 'var(--ttons-foreground)'
+        ? '#ffffff'
+        : 'var(--ttons-background)'};
+  }
   outline: none;
   border: none;
   padding: 0.5rem;
@@ -20,8 +23,9 @@ export const DefaultButton = styled.button<DefaultButtonProps>`
   max-width: 100%;
   cursor: pointer;
   border-radius: var(--ttons-border-radius);
-  border: solid 1px ${p => p.color};
-  transition: all var(--ttons-transition);
+  border: solid 1px ${(p) => p.color};
+  transition: all var(--ttons-transition), width 0.1ms, height 0.1ms, top 0.1ms,
+    padding 0.1ms, right 0.1ms, left 0.1ms, margin 0.1ms;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -33,11 +37,11 @@ export const DefaultButton = styled.button<DefaultButtonProps>`
     }
 
     &:active {
-      scale: 0.95;
+      transform: scale(0.95);
     }
   }
 
-  ${p =>
+  ${(p) =>
     p.small &&
     `
       min-width: 75px;
@@ -61,13 +65,18 @@ export const IconButton = styled.button`
   transition: all var(--ttons-transition);
   font-size: 1.5rem;
 
+  &:disabled {
+    cursor: not-allowed;
+    color: var(--ttons-gray-fg);
+  }
+
   &:not(:disabled) {
     &:hover {
       background: var(--ttons-gray-bg);
     }
 
     &:active {
-      scale: 0.95;
+      transform: scale(0.95);
     }
   }
 `;
@@ -75,7 +84,10 @@ export const IconButton = styled.button`
 export const SecondaryButton = styled(DefaultButton)`
   border: var(--ttons-border);
   background: var(--ttons-background);
-  color: var(--ttons-foreground);
+  &,
+  & * {
+    color: var(--ttons-foreground);
+  }
 
   &:hover {
     border: solid 1px var(--ttons-foreground);
@@ -90,7 +102,7 @@ type ButtonGroupProps = {
 export const ButtonGroup = styled.div<ButtonGroupProps>`
   display: flex;
   & > button {
-    flex: ${p => (p.flex ? '1' : 'unset')};
+    flex: ${(p) => (p.flex ? '1' : 'unset')};
     border-radius: 0;
   }
 
@@ -127,7 +139,7 @@ const loadingKeyframes = keyframes`
   }
 `;
 
-export const LoadingIndicator = styled.span`
+export const LoadingIndicator = styled.span<{ small: boolean }>`
   display: inline-block;
   position: relative;
   height: 0.25rem;
@@ -137,7 +149,7 @@ export const LoadingIndicator = styled.span`
   border-radius: 100%;
   background: #ddd;
 
-  margin: calc((22.5px - 0.25rem) / 2) 0;
+  margin: calc((16px - 0.25rem) / 2) 0;
 
   animation: ${loadingKeyframes} 1.75s infinite;
 
@@ -189,17 +201,27 @@ export const Button = ({
   children,
   ...passedProps
 }: PropsWithChildren<ButtonProps>) => {
-  let Component: any = DefaultButton;
+  let Component: StyledComponent<
+    React.HTMLAttributes<HTMLButtonElement>,
+    DefaultButtonProps,
+    any
+  > = DefaultButton;
   let buttonColor = color;
 
-  if (icon) return <IconButton {...passedProps}>{children}</IconButton>;
+  if (icon)
+    return (
+      <IconButton {...passedProps} disabled={disabled}>
+        {children}
+      </IconButton>
+    );
 
-  if (loading)
+  if (loading) {
     return (
       <DisabledButton {...passedProps} small={small}>
-        <LoadingIndicator />
+        <LoadingIndicator small={small} />
       </DisabledButton>
     );
+  }
 
   if (disabled) Component = DisabledButton;
   if (secondary) Component = SecondaryButton;
@@ -213,5 +235,7 @@ export const Button = ({
     </Component>
   );
 };
+
+Button.Group = ButtonGroup;
 
 export default Button;

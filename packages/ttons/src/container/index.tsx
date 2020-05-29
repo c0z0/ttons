@@ -22,28 +22,28 @@ const getMarginDirection = (direction: string, gap: string) => {
 
 const StyledContainer = styled.div<StyledContainerProps>`
   display: flex;
-  flex-direction: ${p => p.direction};
-  flex: ${p => p.flex};
-  padding: calc(var(--ttons-half-gap) * ${p => p.paddingRatio});
-  justify-content: ${p => p.justifyContent};
-  align-items: ${p => p.alignItems};
+  flex-direction: ${(p) => p.direction};
+  flex: ${(p) => p.flex};
+  padding: calc(var(--ttons-half-gap) * ${(p) => p.paddingRatio});
+  justify-content: ${(p) => p.justifyContent};
+  align-items: ${(p) => p.alignItems};
 
   & > :not(:first-child) {
-    margin: ${p =>
+    margin: ${(p) =>
       getMarginDirection(
         p.direction || '',
-        `calc(var(--ttons-gap) * ${p.gapRatio})`
+        `calc(var(--ttons-gap) * ${p.gapRatio})`,
       )};
   }
 
   ${phoneOnly} {
-    flex-direction: ${p => p.directionMobile};
+    flex-direction: ${(p) => p.directionMobile};
 
     & > :not(:first-child) {
-      margin: ${p =>
+      margin: ${(p) =>
         getMarginDirection(
           p.directionMobile || '',
-          `calc(var(--ttons-gap) * ${p.gapRatio})`
+          `calc(var(--ttons-gap) * ${p.gapRatio})`,
         )};
     }
   }
@@ -65,10 +65,17 @@ export interface ContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   noPadding?: boolean;
   noGap?: boolean;
   gapRatio?: number;
-  justifyContent?: 'flex-end' | 'flex-start' | 'center' | 'unset';
+  justifyContent?:
+    | 'flex-end'
+    | 'flex-start'
+    | 'center'
+    | 'unset'
+    | 'space-between'
+    | 'space-around';
   alignItems?: 'flex-end' | 'flex-start' | 'center' | 'unset';
   direction?: 'row' | 'column' | 'row-reverse' | 'column-reverse';
   directionMobile?: 'row' | 'column' | 'row-reverse' | 'column-reverse' | null;
+  as?: string;
 }
 
 export const Container = ({
@@ -112,10 +119,10 @@ type ContentContainerProps = {
 };
 export const ContentContainer = styled.div<ContentContainerProps>`
   max-width: 900px;
-  margin: ${p => (p.marginTop ? '80px' : '0')} auto 0 auto;
+  margin: ${(p) => (p.marginTop ? '80px' : '0')} auto 0 auto;
 
   ${phoneOnly} {
-    margin: ${p => (p.marginTop ? '40px' : '0')} auto 0 auto;
+    margin: ${(p) => (p.marginTop ? '40px' : '0')} auto 0 auto;
     padding: 0 20px;
   }
 `;

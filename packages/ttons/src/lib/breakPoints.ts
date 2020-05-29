@@ -5,4 +5,6 @@ const tabletUp = tagMedia`min-width: 992px`;
 const desktopUp = tagMedia`min-width: 1200px`;
 const bigDesktopUp = tagMedia`min-width: 1800px`;
 
-export { phoneOnly, tabletUp, desktopUp, bigDesktopUp };
+export {
+  phoneOnly, tabletUp, desktopUp, bigDesktopUp,
+};

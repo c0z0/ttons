@@ -23,13 +23,13 @@ export const H3 = styled.h3`
 `;
 
 export const P = styled.p`
-  font-size: 1rem;
+  font-size: 1.15rem;
   font-weight: 400;
   line-height: 1.6;
   text-align: justify;
 
   & small {
-    font-size: 0.75rem;
+    font-size: 0.75em;
   }
 `;
 
@@ -84,12 +84,14 @@ export const Text = ({
   h1,
   h2,
   h3,
-  as,
-  p,
   children,
   ...passedProps
 }: PropsWithChildren<TextProps>) => {
-  let Component: StyledComponent<any, any, any>;
+  let Component: StyledComponent<
+    React.HTMLAttributes<HTMLHeadingElement & HTMLParagraphElement>,
+    any,
+    any
+  >;
 
   if (h1) Component = H1;
   else if (h2) Component = H2;

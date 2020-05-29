@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
+import { Github } from '@cserdean/icons';
 import Container from '../container';
 import Tabs from './index';
-import { Github } from '@cserdean/icons';
 import Badge from '../badge';
 
 export default {
@@ -71,7 +71,8 @@ export const WithIcon = () => {
           {
             content: (
               <>
-                Tab 1<Badge style={{ marginLeft: '.5rem' }}>2</Badge>
+                Tab 1
+                <Badge style={{ marginLeft: '.5rem' }}>2</Badge>
               </>
             ),
             value: 'tab1',

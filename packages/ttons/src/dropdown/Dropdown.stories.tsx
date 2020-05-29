@@ -1,12 +1,12 @@
 import React from 'react';
 
-import Button from '../button';
-import Dropdown from './index';
 import {
   Menu as MenuIcon,
   Gitlab as GitlabIcon,
   Slack as SlackIcon,
 } from '@cserdean/icons';
+import Button from '../button';
+import Dropdown from './index';
 import Container from '../container';
 
 export default {
@@ -20,11 +20,11 @@ export default {
 export const Primary = () => (
   <Container>
     <Dropdown
-      trigger={
+      trigger={(
         <Button icon>
           <MenuIcon />
         </Button>
-      }
+      )}
     >
       <Dropdown.Item>Item 1</Dropdown.Item>
       <Dropdown.Item>Item 2</Dropdown.Item>
@@ -37,11 +37,11 @@ export const Right = () => (
   <Container alignItems="flex-end">
     <Dropdown
       right
-      trigger={
+      trigger={(
         <Button icon>
           <MenuIcon />
         </Button>
-      }
+      )}
     >
       <Dropdown.Item>Item 1</Dropdown.Item>
       <Dropdown.Item>Item 2</Dropdown.Item>
@@ -54,11 +54,11 @@ export const Inverse = () => (
   <Container>
     <Dropdown
       inverse
-      trigger={
+      trigger={(
         <Button icon>
           <MenuIcon />
         </Button>
-      }
+      )}
     >
       <Dropdown.Item>Item 1</Dropdown.Item>
       <Dropdown.Item>Item 2</Dropdown.Item>
